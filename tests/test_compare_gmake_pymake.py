@@ -113,6 +113,8 @@ def modify_dmap_with_scenario_directives(dmap, makefile):
 
 
 def test_scenarios(makefile, tmp_path_factory, gmake, pymake):
+    # gmake is either path to GNU make, or None if we're in an environment that
+    # lacks GNU make.
 
     print("%-30s%-28s%-28s" % ("Test:", "gmake:", "pymake:"))
 
@@ -150,6 +152,10 @@ def test_scenarios(makefile, tmp_path_factory, gmake, pymake):
     pymake_temp_dir = str(tmp_path_factory.mktemp("pymake"))
     gmakeoptions['commandline'] = ['-C', gmake_temp_dir] + gmakeoptions['commandline']
     pymakeoptions['commandline'] = ['-C', pymake_temp_dir] + pymakeoptions['commandline']
+
+    # Dont attempt to run gmake if we dont have one in this environment
+    if gmake is None:
+        gmakeoptions['skip'] = True
 
     if gmakeoptions['skip']:
         gmakepass, gmakemsg = True, ''

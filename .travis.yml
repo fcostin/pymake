@@ -4,9 +4,13 @@ matrix:
           dist: xenial
           language: python
           python: 3.7
+          env:
+              - GMAKE=make
         - os: osx
           language: sh
           python: 3.7
+          env:
+              - GMAKE=make
         - os: windows
           language: sh
           python: 3.7
@@ -14,6 +18,8 @@ matrix:
               - choco install python3
               - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
               - python -m pip install --upgrade pip wheel
+          env:
+              - GMAKE=make
 
 before_install:
     - .travis/install.sh
@@ -22,4 +28,4 @@ install:
     - pip install -r test-requirements.txt
     - pip install -e .
 script:
-  - pytest --gmake=make -n 4 .
+  - pytest --gmake="$GMAKE" -n 4 .
