@@ -43,6 +43,10 @@ class ParentDict(dict):
 
         return self.parent[k]
 
+def grepfor(pattern, s):
+    r = re.compile(pattern)
+    return r.search(s)
+
 def run_test(makefile, make, logfile, options):
     """
     Given a makefile path, test it with a given `make` and return
@@ -64,9 +68,9 @@ stderr=subprocess.STDOUT, env=options['env'])
         print(stdout)
         return False, "FAIL (TEST-FAIL printed)"
 
-    if options['grepfor'] and stdout.find(options['grepfor']) == -1:
+    if options['grepfor'] and not grepfor(options['grepfor'], stdout):
         print(stdout)
-        return False, "FAIL (%s not in output)" % options['grepfor']
+        return False, "FAIL (regex pattern %s not matched in output)" % options['grepfor']
 
     if options['returncode'] == 0 and stdout.find('TEST-PASS') == -1:
         print(stdout)

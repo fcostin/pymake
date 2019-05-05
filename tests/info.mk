@@ -1,4 +1,4 @@
-#T grep-for: "info-printed\ninfo-nth"
+#T grep-for: "info-printed\r?\ninfo-nth"
 all:
 
 INFO = info-printed
