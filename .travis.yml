@@ -11,19 +11,21 @@ matrix:
           python: 3.7
           env:
               - GMAKE=make
+#        - os: windows
+#          language: sh
+#          python: 3.7
+#          before_install:
+#              - choco install python3
+#              - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
+#              - python -m pip install --upgrade pip wheel
+#          env:
+#              - GMAKE=
         - os: windows
           language: sh
           python: 3.7
           before_install:
-              - choco install python3
-              - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
-              - python -m pip install --upgrade pip wheel
-          env:
-              - GMAKE=
-        - os: windows
-          language: sh
-          python: 3.7
-          before_install:
+              - which git
+              - tar -xvzf .travis/msys2_pacman_bootstrap/staging.tar.gz --directory /
               - which pacman
               - pacman --noconfirm -Syu
               - pacman --noconfirm -S mingw-w64-x86_64-python3
