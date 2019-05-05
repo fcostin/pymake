@@ -31,7 +31,6 @@ matrix:
               - python -m pip install --upgrade pip wheel
           env:
               - GMAKE=
-        - os: windows
 
 
 before_install:
