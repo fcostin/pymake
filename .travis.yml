@@ -28,4 +28,4 @@ install:
     - pip install -r test-requirements.txt
     - pip install -e .
 script:
-  - pytest --gmake="$GMAKE" -n 4 .
+  - pytest --gmake="$GMAKE" -k empty-rule .

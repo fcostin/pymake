@@ -1601,7 +1601,7 @@ class _RemakeContext(object):
 
         if len(self.toremake):
             target, self.required = self.toremake.pop(0)
-            target.make(self.makefile, [], avoidremakeloop=True, cb=self.remakecb, printerror=False)
+            target.make(self.makefile, [], avoidremakeloop=True, cb=self.remakecb, printerror=True) # xxx hack print the error
         else:
             for t, required in self.included:
                 if t.wasremade:
