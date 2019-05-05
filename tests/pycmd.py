@@ -10,12 +10,19 @@ def writeenvtofile(args):
 
 def writesubprocessenvtofile(args):
   with open(args[0], 'w') as f:
-    p = subprocess.Popen([sys.executable, "-c",
-                          "import os; print(os.environ['%s'])" % args[1]],
-                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    p = subprocess.Popen(
+      [
+        sys.executable,
+        "-c",
+        "import os, sys; sys.stdout.write(os.environ['%s'])" % args[1]
+      ],
+      stdout=subprocess.PIPE,
+      stderr=subprocess.PIPE,
+      text=True,
+    )
     stdout, stderr = p.communicate()
-    assert p.returncode == 0
-    f.write(stdout.decode("utf-8"))
+    assert p.returncode == 0, stderr
+    f.write(stdout)
 
 def convertasplode(arg):
   try:
