@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 $env:MSYS64_USR_BIN_DIR = "C:\tools\msys64\usr\bin"
 $env:PATH = "$env:MSYS64_USR_BIN_DIR" + ";" + "$env:PATH"
 $env:MSYS64_BASH = "$env:MSYS64_USR_BIN_DIR" + "\bash.exe"
-$env:MSYS64_BOOT= "$env:MSYS64_USR_BIN_DIR" + "/boot.sh"
+$env:MSYS64_BOOT= "$env:TRAVIS_BUILD_DIR" + "/boot.sh"
 
 (get-command 'bash.exe').Path
 
