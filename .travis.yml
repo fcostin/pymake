@@ -38,22 +38,26 @@ matrix:
           language: sh
           python: 3.7
           before_install:
-              - choco install python3
-              - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
-              - python -m pip install --upgrade pip wheel
-          env:
-              - GMAKE=
-
-
-before_install:
-    - .travis/install.sh
-    - source .travis/activate_virtualenv.sh
-install:
-    - pip install -r test-requirements.txt
-    - pip install -e .
-script:
-    - powershell -NoLogo -NonInteractive -Command "$PSVersionTable.PSVersion"
-    - powershell -NoLogo -NonInteractive -Command "(get-command 'python.exe').Path"
-    - powershell -NoLogo -NonInteractive -Command "(get-command 'pip.exe').Path"
-    - powershell -NoLogo -NonInteractive -Command "python.exe -m pytest --gmake=${env:GMAKE} -k empty-rule ${env:TRAVIS_BUILD_DIR}"
+              # pymake on windows requires a msys environment with msys-compatible python:
+              # The "sh" environment that travis-ci provides is implemented using git-bash,
+              # which in turn is implemented using parts of msys2, but alas: by default
+              # git-bash does not include the msys2 version of python. If we try to use git-bash
+              # with standard windows python then some things break:
+              #	- when recursively pymake-ing, windows style C:\foo\barr paths get passed
+              #   to pymake, which deletes unknown escape characters, producing broken paths
+              #   like the following: Cfoobarr ;
+              # - if python writes a string ending with '\r\n' to a file, when python
+              #   reads the string in again, the string contains '\n\n', i.e. the number
+              #   of newlines is not conserved.
+              # Instead of using standard windows python, we need to install msys2's build of
+              # python3. We cannot directly do this using git-bash, as it does not include
+              # msys2's package manager, `pacman`.
+              # At this point it seems easier to just install our own msys2 environment,
+              # separately from the git-bash shell that travis-ci provides for us by default,
+              # which will include `pacman`
+              - choco install -y msys2
+              # Workaround: launch msys2 from inside powershell instead of from inside git-bash.
+              # ref: https://travis-ci.community/t/how-do-i-use-mingw-and-msys2-shells/1787
+              - powershell -NoLogo -NonInteractive -Command "$PSVersionTable.PSVersion"
+              - powershell -nologo -noninteractive -executionpolicy bypass -file boot.ps1
 

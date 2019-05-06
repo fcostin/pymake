@@ -1,0 +1,12 @@
+(get-command 'bash.exe').Path
+bash.exe -l -c 'logout'
+bash.exe -l -c 'pacman -Syu --noconfirm mingw-w64-x86_64-python3-pip && logout'
+bash.exe -c 'which python3 || true'
+bash.exe -c 'which python2 || true'
+bash.exe -c 'which python || true'
+bash.exe -c 'python3 --version || true'
+bash.exe -c 'python2 --version || true'
+bash.exe -c 'python --version || true'
+bash.exe -c 'pip install -r requirements.txt'
+bash.exe -c 'pip install -e .'
+bash.exe -c 'pytest -k empty-rule .'
