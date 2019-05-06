@@ -58,6 +58,5 @@ matrix:
               - choco install -y msys2
               # Workaround: launch msys2 from inside powershell instead of from inside git-bash.
               # ref: https://travis-ci.community/t/how-do-i-use-mingw-and-msys2-shells/1787
-              - powershell -NoLogo -NonInteractive -Command "$PSVersionTable.PSVersion"
-              - powershell -nologo -noninteractive -executionpolicy bypass -file boot.ps1
+              - powershell -NoLogo -NonInteractive -ExecutionPolicy bypass -File boot.ps1
 
