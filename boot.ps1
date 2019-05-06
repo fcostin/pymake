@@ -1,6 +1,6 @@
 $ErrorActionPreference = "Stop"
 
-$env:MSYS64_USR_BIN_DIR = "C:\tools\msys64\usr\bin\bash"
+$env:MSYS64_USR_BIN_DIR = "C:\tools\msys64\usr\bin"
 $env:PATH = "$env:MSYS64_USR_BIN_DIR" + ";" + "$env:PATH"
 $env:MSYS64_BASH = "$env:MSYS64_USR_BIN_DIR" + "\bash.exe"
 
