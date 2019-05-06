@@ -1,16 +1,16 @@
 matrix:
     include:
-        - os: linux
-          dist: xenial
-          language: python
-          python: 3.7
-          env:
-              - GMAKE=make
-        - os: osx
-          language: sh
-          python: 3.7
-          env:
-              - GMAKE=make
+#        - os: linux
+#          dist: xenial
+#          language: python
+#          python: 3.7
+#          env:
+#              - GMAKE=make
+#        - os: osx
+#          language: sh
+#          python: 3.7
+#          env:
+#              - GMAKE=make
 #        - os: windows
 #          language: sh
 #          python: 3.7
