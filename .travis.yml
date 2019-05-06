@@ -20,20 +20,20 @@ matrix:
 #              - python -m pip install --upgrade pip wheel
 #          env:
 #              - GMAKE=
-        - os: windows
-          language: sh
-          python: 3.7
-          before_install:
-              - which git
-              - tar -xvzf .travis/msys2_pacman_bootstrap/staging.tar.gz --directory /
-              - which pacman
-              - pacman --noconfirm -Syy
-              - pacman --noconfirm -Syu
-              - pacman --noconfirm -S mingw-w64-x86_64-python3
-              - which python
-              - python -m pip install --upgrade pip wheel
-          env:
-              - GMAKE=
+#        - os: windows
+#          language: sh
+#          python: 3.7
+#          before_install:
+#              - which git
+#              - tar -xvzf .travis/msys2_pacman_bootstrap/staging.tar.gz --directory /
+#              - which pacman
+#              - pacman --noconfirm -Syy
+#              - pacman --noconfirm -Syu
+#              - pacman --noconfirm -S mingw-w64-x86_64-python3
+#              - which python
+#              - python -m pip install --upgrade pip wheel
+#          env:
+#              - GMAKE=
 
 
 before_install:
