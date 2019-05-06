@@ -52,9 +52,8 @@ install:
     - pip install -r test-requirements.txt
     - pip install -e .
 script:
-    - powershell -NoLogo -NonInteractive -Version
-    - powershell -NoLogo -NonInteractive -Command "(get-command python.exe).Path"
-    - powershell -NoLogo -NonInteractive -Command "(get-command pip.exe).Path"
-    - powershell -NoLogo -NonInteractive -Command "(get-command python3.exe).Path"
+    - powershell -NoLogo -NonInteractive -Command "$PSVersionTable.PSVersion"
+    - powershell -NoLogo -NonInteractive -Command "(get-command 'python.exe').Path"
+    - powershell -NoLogo -NonInteractive -Command "(get-command 'pip.exe').Path"
     - powershell -NoLogo -NonInteractive -Command "python.exe -m pytest --gmake=${env:GMAKE} -k empty-rule ${env:TRAVIS_BUILD_DIR}"
 
