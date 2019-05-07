@@ -1,4 +1,4 @@
-set -e -x
+# set -e -x
 
 cd "$TRAVIS_BUILD_DIR"
 
@@ -7,12 +7,15 @@ pacman -Syu --noconfirm mingw-w64-x86_64-python3-pip
 pacman -Ql mingw-w64-x86_64-python3-pip
 pacman -Ql mingw-w64-x86_64-python3
 
-which python3
-python3 --version
+export PATH=/mingw64/bin/:$PATH
 
-pwd
-ls -l
+echo $PATH
 
-python3 -m pip -- install -r requirements.txt
-python3 -m pip -- install -e .
-python3 -m pytest -- -k empty-rule .
+which pacman
+which python3.exe
+which pip3.exe
+
+
+python3.exe -m pip -- install -r requirements.txt
+python3.exe -m pip -- install -e .
+python3.exe -m pytest -- -k empty-rule .
