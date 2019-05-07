@@ -16,6 +16,6 @@ which python3.exe
 which pip3.exe
 
 
-python3.exe -m pip -- install -r requirements.txt
-python3.exe -m pip -- install -e .
-python3.exe -m pytest -- -k empty-rule .
+python3.exe -m pip install -r test-requirements.txt
+python3.exe -m pip install -e .
+python3.exe -m pytest -n 4 .
